@@ -19,6 +19,8 @@ const search = (req, res) => {
         let currentSnippet = '';
         let outputText = '';
 
+        let searchResults = []; 
+        
         const outputStream = fs.createWriteStream(outputFilePath, { flags: 'a' });
 
         new PdfReader().parseFileItems(pdfPath, (err, item) => {
@@ -37,10 +39,25 @@ const search = (req, res) => {
                         const start = Math.max(0, match.index - charactersBeforeKeyword);
                         const end = Math.min(currentSnippet.length, match.index + keyword.length + charactersAfterKeyword);
                         const snippet = currentSnippet.substring(start, end).trim();
+
+                        const resultObject = {
+                            keyword: keyword,
+                            page: {
+                                number: currentPage,
+                                content: snippet
+                            }
+                        };
+
+                        searchResults.push(resultObject);
+
                         outputText += `(keyword: ${keyword}) - Page ${currentPage}:
                 \n ${snippet}\n\n_____________________________________________________________________________\n`;
+
+
                     }
                 });
+
+
 
                 currentSnippet = '';
                 outputStream.end();
@@ -53,6 +70,8 @@ const search = (req, res) => {
 
         outputStream.on('finish', () => {
             fs.writeFileSync(outputFilePath, outputText, { flag: 'a' });
+            res.json(searchResults);
+
             console.log('Output written to file:', outputFilePath);
         });
 
