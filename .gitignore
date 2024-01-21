@@ -1,0 +1,33 @@
+/searchResults/*.txt
+
+# Ignore compiled binaries
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Ignore build output directories
+/bin/
+/build/
+/dist/
+
+# Ignore package manager directories
+/node_modules/
+/vendor/
+
+# Ignore log files
+*.log
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore editor-specific files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore temporary files
+*.tmp
+*.bak
+*.swp

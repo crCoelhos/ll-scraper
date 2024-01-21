@@ -1,46 +1,16 @@
-const fs = require('fs');
-import PdfReader from "pdfreader";
+import fs from 'fs';
+import { PdfReader } from 'pdfreader';
 
-const searchBy = (req, res) => {
-    try {
-        const keyword = req.params.keyword;
-
-
-        const currentDate = new Date();
-        const currentHour = currentDate.getHours();
-        const currentMinutes = currentDate.getMinutes();
-
-        const outputFilePath = `../searchResults/output_${currentHour}_${currentMinutes}.txt`;
-        const content = fs.readFileSync(outputFilePath, 'utf-8');
-
-
-        const lines = content.split('\n').filter(line => line.trim() !== '');
-
-        const filteredResults = lines.filter(line => line.includes(keyword));
-
-        const jsonResponse = filteredResults.map((line, index) => ({
-            page: index + 1,
-            content: line.trim()
-        }));
-
-        res.json(jsonResponse);
-    } catch (error) {
-        console.error('Erro na busca:', error);
-        res.status(500).json({ error: 'Erro interno do servidor' });
-    }
-};
 const search = (req, res) => {
     try {
+        const searchKeywords = req.params.keyword.split(',');
 
-        const searchKeywords = req.params.keyword;
 
-        const pdfPath = '../src/base2.pdf';
+        console.log(searchKeywords)
 
-        const currentDate = new Date();
-        const currentHour = currentDate.getHours();
-        const currentMinutes = currentDate.getMinutes();
 
-        const outputFilePath = `../searchResults/output_${currentHour}_${currentMinutes}.txt`;
+        const pdfPath = 'C:/Users/crist/OneDrive/Documentos/GitHub/ll-scrapper/src/base2.pdf';
+        const outputFilePath = `C:/Users/crist/OneDrive/Documentos/GitHub/ll-scrapper/searchResults/output.txt`;
 
         const charactersBeforeKeyword = 350;
         const charactersAfterKeyword = 350;
@@ -68,7 +38,7 @@ const search = (req, res) => {
                         const end = Math.min(currentSnippet.length, match.index + keyword.length + charactersAfterKeyword);
                         const snippet = currentSnippet.substring(start, end).trim();
                         outputText += `(keyword: ${keyword}) - Page ${currentPage}:
-                        \n ${snippet}\n\n_____________________________________________________________________________\n`;
+                \n ${snippet}\n\n_____________________________________________________________________________\n`;
                     }
                 });
 
@@ -87,14 +57,12 @@ const search = (req, res) => {
         });
 
 
-        res.json(jsonResponse);
     } catch (error) {
         console.error('Erro na busca:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
     }
 };
 
-module.exports = {
-    searchBy,
-    search
+export default {
+    search,
 };

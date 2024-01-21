@@ -1,7 +1,9 @@
-const express = require('express');
-const router = express.Router();
-const crowlRoutes = require('./crowlRoutes');
+import express from 'express';
+import { Router } from 'express';
+import crowlRoutes from './crowlRoutes.js';
+
+const router = Router();
 
 router.use('/process/v1', crowlRoutes);
 
-module.exports = router;
+export default router;
