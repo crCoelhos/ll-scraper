@@ -1,7 +1,9 @@
-// numero correto string errada
+import express from 'express';
 import { PdfReader } from 'pdfreader';
 import fs from 'fs';
 
+const app = express();
+const port = 3000;
 
 const search = (req, res) => {
     try {
