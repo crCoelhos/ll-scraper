@@ -1,15 +1,11 @@
-import express from 'express';
-import { Router } from 'express';
 
-import crowlController from '../controllers/crowlController.js';
+import { Router } from 'express';
+import crowl from '../controllers/crowl.js';
+import main from '../controllers/mainCrowlController.js';
 
 const router = Router();
 
-
-router.get('/search/teste', (req, res) => {
-    res.status(200).json({ message: 'user teste' });
-});
-
-router.get('/search/:keyword', crowlController.search);
+router.get('/search/:keyword', crowl.search);
+router.get('/main/:keyword', main.search);
 
 export default router;

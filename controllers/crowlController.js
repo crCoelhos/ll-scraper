@@ -1,11 +1,11 @@
-// numero correto string errada
 import { PdfReader } from 'pdfreader';
 import fs from 'fs';
-
 
 const search = (req, res) => {
     try {
         const searchKeywords = req.params.keyword.split(',');
+
+
         const pdfPath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/base2.pdf';
         const outputFilePath = `C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/searchResults/output.txt`;
 
@@ -35,15 +35,15 @@ const search = (req, res) => {
                         const resultObject = {
                             keyword: keyword,
                             page: {
-                                number: currentPage,
+                                number: currentPage.number,
                                 content: snippet
                             },
-                            pageNumber: currentPage
+                            pageNumber: currentPage.number
                         };
 
                         searchResults.push(resultObject);
 
-                        outputText += `(keyword: ${keyword}) - Page ${currentPage}:\n ${snippet}\n\n_____________________________________________________________________________\n`;
+                        outputText += `(keyword: ${keyword}) - Page ${currentPage.number}:\n ${snippet}\n\n_____________________________________________________________________________\n`;
                     }
                 });
             }
