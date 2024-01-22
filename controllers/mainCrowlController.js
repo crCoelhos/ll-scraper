@@ -62,7 +62,7 @@ const readPdf = async (pdfFilePath, keyword, maxLength) => {
 
 const search = async (req, res) => {
     const keyword = req.params.keyword;
-    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/base2.pdf';
+    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/base3.pdf';
 
     const outputFilePath = `C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/searchResults/output.txt`;
 
