@@ -62,16 +62,17 @@ const readPdf = async (pdfFilePath, keyword, maxLength) => {
 
 const search = async (req, res) => {
     const keyword = req.params.keyword;
-    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/base3.pdf';
+    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/DE20240124.pdf'; //criar controller que receba data como param com base nessa notação (DE{AAAA}{DD}{MM}.pdf)
 
     const outputFilePath = `C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/searchResults/output.txt`;
 
-    const maxLength = 500;
+    const maxLength = 1500;
 
     try {
         const results = await readPdf(pdfFilePath, keyword, maxLength);
         if (results.length > 0) {
             res.json(results);
+            console.log(results);
         }
         else {
             res.status(404).json({ error: 'Keyword not found' });

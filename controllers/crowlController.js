@@ -59,11 +59,15 @@ const search = (req, res) => {
                 console.log('EOF.');
                 outputStream.end(() => {
                     res.json(searchResults);
+                    console.log(searchResults)
                 });
             } else {
                 processItem(item);
+                console.log(searchResults);
             }
         });
+
+
     } catch (error) {
         console.error('Erro na busca:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });
