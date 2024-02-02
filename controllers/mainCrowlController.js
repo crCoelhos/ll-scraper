@@ -1,6 +1,7 @@
 import { PdfReader } from 'pdfreader';
 
 const limitCharactersAroundKeyword = (text, keyword, maxLength) => {
+
     const keywordIndex = text.indexOf(keyword);
 
     if (keywordIndex === -1) {
@@ -19,13 +20,16 @@ const limitCharactersAroundKeyword = (text, keyword, maxLength) => {
 };
 
 const readPdf = async (pdfFilePath, keyword, maxLength) => {
+
     const reader = new PdfReader();
     let pageNumber = null;
     let content = '';
     let results = [];
 
     const parsePromise = (resolve, reject) => {
+
         reader.parseFileItems(pdfFilePath, (err, item) => {
+
             if (err) {
                 reject(err);
                 return;
@@ -61,8 +65,11 @@ const readPdf = async (pdfFilePath, keyword, maxLength) => {
 };
 
 const search = async (req, res) => {
+
     const keyword = req.params.keyword;
-    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/DE20240124.pdf'; //criar controller que receba data como param com base nessa notação (DE{AAAA}{DD}{MM}.pdf)
+
+    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/DE20240201.pdf';
+    //criar controller que receba data como param com base nessa notação (DE{AAAA}{DD}{MM}.pdf)
 
     const outputFilePath = `C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/searchResults/output.txt`;
 
@@ -70,10 +77,12 @@ const search = async (req, res) => {
 
     try {
         const results = await readPdf(pdfFilePath, keyword, maxLength);
+
         if (results.length > 0) {
             res.json(results);
             console.log(results);
         }
+
         else {
             res.status(404).json({ error: 'Keyword not found' });
         }
