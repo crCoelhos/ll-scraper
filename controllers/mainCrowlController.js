@@ -66,12 +66,21 @@ const readPdf = async (pdfFilePath, keyword, maxLength) => {
 
 const search = async (req, res) => {
 
-    const keyword = req.params.keyword;
+    const currentYear = new Date().getFullYear();
+    const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
+    const day = new Date().getDate().toString().padStart(2, '0');
+    const pdfOfTheDay = `DE${currentYear}${currentMonth}${day}.pdf`;
 
-    const pdfFilePath = 'C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/src/DE20240201.pdf';
+
+
+
+    
+    const keyword = req.params.keyword;
+    const rootPath = 'src/';
+    // const pdfFilePath = rootPath + pdfOfTheDay;
+    const pdfFilePath = rootPath + 'DE20240209.pdf';
     //criar controller que receba data como param com base nessa notação (DE{AAAA}{DD}{MM}.pdf)
 
-    const outputFilePath = `C:/Users/WEBACADEMY/Documents/GitHub/ll-scraper/searchResults/output.txt`;
 
     const maxLength = 1500;
 
