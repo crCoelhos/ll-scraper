@@ -1,5 +1,5 @@
-import { PdfReader } from 'pdfreader';
 
+import { PdfReader } from 'pdfreader';
 const limitCharactersAroundKeyword = (text, keyword, maxLength) => {
 
     const keywordIndex = text.indexOf(keyword);
@@ -77,9 +77,7 @@ const search = async (req, res) => {
     
     const keyword = req.params.keyword;
     const rootPath = 'src/';
-    // const pdfFilePath = rootPath + pdfOfTheDay;
-    const pdfFilePath = rootPath + 'DE20240209.pdf';
-    //criar controller que receba data como param com base nessa notação (DE{AAAA}{DD}{MM}.pdf)
+    const pdfFilePath = rootPath + pdfOfTheDay;
 
 
     const maxLength = 1500;
