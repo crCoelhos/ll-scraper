@@ -1,6 +1,8 @@
 /searchResults/*.txt
+.env
 
 # Ignore compiled binaries
+*.env
 *.exe
 *.dll
 *.so
