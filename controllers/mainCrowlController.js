@@ -67,6 +67,9 @@ const readPdf = async (pdfFilePath, keyword, maxLength) => {
 };
 
 const search = async (req, res) => {
+    console.log('\n')
+
+    console.log('search function has been called at ' + new Date().toLocaleString());
 
     const currentYear = new Date().getFullYear();
     const currentMonth = (new Date().getMonth() + 1).toString().padStart(2, '0');
@@ -85,6 +88,9 @@ const search = async (req, res) => {
     const maxLength = 1500;
 
     try {
+
+        console.log('\n')
+        console.log('searching for ' + keyword + ' on ' + pdfOfTheDay + ' at ' + new Date().toLocaleString());
 
         if (!fs.existsSync(pdfFilePath)) {
             res.status(404).json({ error: `${pdfFilePath} PDF not found` });
