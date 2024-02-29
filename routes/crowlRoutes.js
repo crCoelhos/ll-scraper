@@ -13,10 +13,6 @@ router.get('/main/', (req, res) => {
     res.send('process/version/main is running');
 });
 
-app.get('/', (req, res) => {
-    res.send('legaliga api running');
-});
-
 
 router.get('/search/:keyword', crowl.search);
 router.get('/main/:keyword', main.search);
