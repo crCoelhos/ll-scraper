@@ -1,11 +1,13 @@
 
 import { PdfReader } from 'pdfreader';
+import fs from 'fs';
+
 const limitCharactersAroundKeyword = (text, keyword, maxLength) => {
 
     const keywordIndex = text.indexOf(keyword);
 
     if (keywordIndex === -1) {
-        return "key not found";
+        return `key not found`;
     }
 
     const start = Math.max(0, keywordIndex - Math.floor(maxLength / 2));
@@ -74,7 +76,7 @@ const search = async (req, res) => {
 
 
 
-    
+
     const keyword = req.params.keyword;
     const rootPath = 'src/';
     const pdfFilePath = rootPath + pdfOfTheDay;
@@ -83,6 +85,17 @@ const search = async (req, res) => {
     const maxLength = 1500;
 
     try {
+
+        if (!fs.existsSync(pdfFilePath)) {
+            res.status(404).json({ error: `${pdfFilePath} PDF not found` });
+            return;
+        }
+
+        if (pdfFilePath === '') {
+            res.status(404).json({ error: 'A PDF must be addressed' });
+            return;
+        }
+
         const results = await readPdf(pdfFilePath, keyword, maxLength);
 
         if (results.length > 0) {
@@ -91,7 +104,7 @@ const search = async (req, res) => {
         }
 
         else {
-            res.status(404).json({ error: 'Keyword not found' });
+            res.status(404).json({ error: `Keyword -${keyword}- not found on -${pdfOfTheDay}-` });
         }
 
     } catch (error) {
