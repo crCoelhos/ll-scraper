@@ -13,6 +13,12 @@ app.use(express.json());
 app.use(cors());
 app.use(routes);
 
+
+app.get('/', (req, res) => {
+    res.send('ll-scraper is running');
+});
+
+
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);
