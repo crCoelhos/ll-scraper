@@ -76,6 +76,9 @@ const search = async (req, res) => {
     const day = new Date().getDate().toString().padStart(2, '0');
     const pdfOfTheDay = `DE${currentYear}${currentMonth}${day}.pdf`;
 
+    
+    const pdfOfYesterday = `DE${currentYear}${currentMonth}${day - 1}.pdf`;
+
 
 
 
@@ -94,7 +97,8 @@ const search = async (req, res) => {
 
         if (!fs.existsSync(pdfFilePath)) {
             res.status(404).json({ error: `${pdfFilePath} PDF not found` });
-            return;
+            console.log('PDF not found');
+            pdfFilePath = rootPath + pdfOfYesterday;
         }
 
         if (pdfFilePath === '') {
